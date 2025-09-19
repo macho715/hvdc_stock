@@ -47,6 +47,5 @@
     "env": {
       "NEXT_PUBLIC_MODE": "B"
     }
-  },
-  "regions": ["icn1", "hnd1"]
+  }
 }
