@@ -5,7 +5,7 @@ let _db: duckdb.Database | null = null;
 let _conn: duckdb.Connection | null = null;
 
 export function getConn(): duckdb.Connection {
-  const dbPath = process.env.DUCKDB_PATH || "../out_recon/sku_master_v2.duckdb";
+  const dbPath = process.env.DUCKDB_PATH || "./out_recon/sku_master_v2.duckdb";
   
   // 절대 경로로 변환
   const absolutePath = path.resolve(dbPath);

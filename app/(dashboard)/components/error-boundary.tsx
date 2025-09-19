@@ -69,7 +69,7 @@ function DefaultErrorFallback({ error, reset }: { error: Error; reset: () => voi
             Try Again
           </button>
           <button
-            onClick={() => window.location.reload()}
+            onClick={() => typeof window !== 'undefined' && window.location.reload()}
             className="w-full px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors"
           >
             Reload Page
@@ -106,6 +106,9 @@ export function AsyncErrorBoundary({ children, fallback }: AsyncErrorBoundaryPro
   const [error, setError] = React.useState<Error | null>(null);
 
   React.useEffect(() => {
+    // Check if we're on the client side
+    if (typeof window === 'undefined') return;
+
     const handleError = (event: ErrorEvent) => {
       setError(new Error(event.message));
     };

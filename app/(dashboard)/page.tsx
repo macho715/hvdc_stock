@@ -1,5 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
+
+export const dynamic = "force-dynamic";
 import { ErrorBoundary, AsyncErrorBoundary } from "./components/error-boundary";
 import { LoadingSpinner } from "./components/ui/loading-spinner";
 import { formatDate } from "@/lib/utils";
