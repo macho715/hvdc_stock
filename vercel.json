@@ -10,16 +10,22 @@
       "maxDuration": 30
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1",
-      "headers": {
-        "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300"
-      }
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     }
   ],
   "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=60, stale-while-revalidate=300"
+        }
+      ]
+    },
     {
       "source": "/api/kpi",
       "headers": [
