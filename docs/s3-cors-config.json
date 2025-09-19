@@ -1,0 +1,36 @@
+{
+  "description": "S3 CORS configuration for HVDC Dashboard MODE_A",
+  "cors_rules": [
+    {
+      "AllowedHeaders": ["*"],
+      "AllowedMethods": ["GET", "HEAD"],
+      "AllowedOrigins": [
+        "http://localhost:3000",
+        "https://*.vercel.app",
+        "https://your-domain.com"
+      ],
+      "ExposeHeaders": ["ETag", "Content-Length", "Content-Type"],
+      "MaxAgeSeconds": 300
+    }
+  ],
+  "deployment_instructions": {
+    "aws_cli": "aws s3api put-bucket-cors --bucket your-bucket-name --cors-configuration file://s3-cors-config.json",
+    "terraform": "Use aws_s3_bucket_cors_configuration resource",
+    "cloudformation": "Use AWS::S3::Bucket CorsConfiguration",
+    "vercel": "Use Vercel's Edge Config or Environment Variables"
+  },
+  "security_notes": [
+    "Replace 'your-domain.com' with your actual production domain",
+    "Limit AllowedOrigins to specific domains in production",
+    "Consider using Vercel's built-in CORS handling for better security",
+    "Use presigned URLs for sensitive data access"
+  ],
+  "testing": {
+    "curl_example": "curl -H 'Origin: https://your-domain.com' -I https://your-bucket.s3.amazonaws.com/data/SKU_MASTER_v2.parquet",
+    "expected_headers": [
+      "Access-Control-Allow-Origin: https://your-domain.com",
+      "Access-Control-Allow-Methods: GET, HEAD",
+      "Access-Control-Expose-Headers: ETag, Content-Length, Content-Type"
+    ]
+  }
+}

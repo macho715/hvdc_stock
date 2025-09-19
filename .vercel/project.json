@@ -1,0 +1,18 @@
+{
+  "projectId": "hvdc-dashboard",
+  "orgId": "your-org-id",
+  "settings": {
+    "framework": "nextjs",
+    "buildCommand": "next build",
+    "outputDirectory": ".next",
+    "installCommand": "pnpm i || npm i",
+    "devCommand": "next dev",
+    "functions": {
+      "app/api/**/route.ts": {
+        "runtime": "nodejs22.x",
+        "memory": 1024,
+        "maxDuration": 30
+      }
+    }
+  }
+}

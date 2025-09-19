@@ -1,0 +1,52 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm ci",
+  "functions": {
+    "app/api/**/route.ts": {
+      "runtime": "nodejs22.x",
+      "memory": 1024,
+      "maxDuration": 30
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1",
+      "headers": {
+        "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300"
+      }
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/kpi",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=120, stale-while-revalidate=600"
+        }
+      ]
+    },
+    {
+      "source": "/api/heatmap",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=300, stale-while-revalidate=1800"
+        }
+      ]
+    }
+  ],
+  "env": {
+    "DUCKDB_PATH": "out_recon/sku_master_v2.duckdb",
+    "DEFAULT_TOLERANCE_PCT": "10"
+  },
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_MODE": "B"
+    }
+  },
+  "regions": ["icn1", "hnd1"]
+}

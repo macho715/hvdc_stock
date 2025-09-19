@@ -1,0 +1,26 @@
+{
+  "timestamp": "2025-09-20T00:43:32.819323",
+  "environment": "dev",
+  "input_files": {
+    "hitachi": "HVDC_excel_reporter_final_sqm_rev.xlsx",
+    "siemens": "HVDC_excel_reporter_final_sqm_rev.xlsx",
+    "stock": "HVDC_Stock On Hand Report (1).xlsx",
+    "invoice": null
+  },
+  "output_directory": "out_recon",
+  "kpi": {
+    "execution_time": 33.422488,
+    "total_records": 6791,
+    "unique_skus": 6790,
+    "flow_coverage": 5,
+    "location_coverage": 12,
+    "vendor_distribution": {
+      "HITACHI": 6791
+    },
+    "data_sources": {
+      "reporter_records": 0,
+      "stock_records": 2322,
+      "invoice_records": 0
+    },
+    "invoice_pass_rate": 0,
+    "invoice_fail_count": 
