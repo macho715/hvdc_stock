@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getConn } from "@/lib/duck-server";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
@@ -52,20 +53,21 @@ export async function GET() {
     
     const rows = conn.prepare(sql).all();
     
-    // 통계 계산
-    const totalStock = rows.reduce((sum, row) => sum + row.stock, 0);
-    const totalSqm = rows.reduce((sum, row) => sum + row.sqm, 0);
-    const uniqueLocations = new Set(rows.map(row => row.loc)).size;
-    const uniqueMonths = new Set(rows.map(row => row.ym)).size;
+    // 배열 검증 및 통계 계산
+    const validRows = Array.isArray(rows) ? rows : [];
+    const totalStock = validRows.reduce((sum, row) => sum + (row.stock || 0), 0);
+    const totalSqm = validRows.reduce((sum, row) => sum + (row.sqm || 0), 0);
+    const uniqueLocations = new Set(validRows.map(row => row.loc)).size;
+    const uniqueMonths = new Set(validRows.map(row => row.ym)).size;
     
     return NextResponse.json({ 
-      rows,
+      rows: validRows,
       stats: {
         total_stock: totalStock,
         total_sqm: totalSqm,
         unique_locations: uniqueLocations,
         unique_months: uniqueMonths,
-        total_records: rows.length
+        total_records: validRows.length
       }
     });
   } catch (error) {

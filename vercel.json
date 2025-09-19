@@ -1,5 +1,8 @@
 {
   "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm ci",
   "functions": {
     "app/api/**/route.ts": {
       "runtime": "nodejs22.x",
