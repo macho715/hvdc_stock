@@ -4,9 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000",
+    "prebuild": "node scripts/fetch-duckdb.mjs",
     "build": "next build",
+    "postbuild": "node scripts/validate-build.mjs",
     "start": "next start -p 3000",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit --skipLibCheck",
+    "test": "echo \"No tests specified\" && exit 0",
+    "clean": "rm -rf .next out out_recon",
+    "prepare": "node scripts/fetch-duckdb.mjs"
   },
   "dependencies": {
     "@duckdb/duckdb-wasm": "^1.28.0",

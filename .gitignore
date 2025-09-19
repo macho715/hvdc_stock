@@ -84,9 +84,29 @@ jspm_packages/
 tmp/
 temp/
 
-# DuckDB files (optional - uncomment if you want to exclude them)
-# *.duckdb
+# HVDC Project specific
+out_recon/*.duckdb
+out_recon/*.parquet
+out_recon/*.json
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
 
-# Large data files
+# Large data files (use Git LFS instead)
+*.xlsx
+*.xls
+*.csv
 *.parquet
-!out_recon/SKU_MASTER_v2.parquet
+*.duckdb
+
+# Python specific
+*.egg-info/
+dist/
+build/
